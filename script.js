@@ -4,26 +4,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const taskList = document.getElementById('task-list');
 
     function addTask() {
-        const taskText = taskInput.value.trim();
+    const taskText = taskInput.value.trim();
 
-        if (taskText !== "") {
-            const li = document.createElement('li');
-            li.textContent = taskText;
-
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = "Remove";
-            removeBtn.classList.add('remove-btn'); // ✅ required for classList.add
-
-            removeBtn.onclick = function () {
-                taskList.removeChild(li);
-            };
-
-            li.appendChild(removeBtn);
-            taskList.appendChild(li);
-
-            taskInput.value = "";
-        }
+    if (taskText === "") {
+        // Show alert if input is empty
+        alert("Please enter a task.");
+        return;
     }
+
+    const li = document.createElement('li');
+    li.textContent = taskText;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = "Remove";
+    removeBtn.classList.add('remove-btn');
+
+    removeBtn.onclick = function () {
+        taskList.removeChild(li);
+    };
+
+    li.appendChild(removeBtn);
+    taskList.appendChild(li);
+
+    taskInput.value = "";
+}
+
 
     addButton.addEventListener('click', addTask); // ✅ required
 
