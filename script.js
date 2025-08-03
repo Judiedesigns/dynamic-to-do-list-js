@@ -24,45 +24,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // 🎯 STEP 4: Task Creation and Removal
+        // Within the addTask function, if taskText is not empty:
         console.log("✨ Creating new task:", taskText);
         
-        // Create a new list item (like getting a new sticky note)
+        // Create a new li element. Set its textContent to taskText.
         const listItem = document.createElement('li');
         listItem.textContent = taskText;
         
-        // Create a remove button (like adding a trash icon to each note)
+        // Create a new button element for removing the task
+        // Set its textContent to "Remove", and give it a class name of 'remove-btn'
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
         removeButton.className = 'remove-btn';
         
-        // Make the remove button work (when clicked, delete this task)
+        // Assign an onclick event to the remove button that, when triggered, 
+        // removes the li element from taskList
         removeButton.onclick = function() {
             console.log("🗑️ Removing task:", taskText);
             taskList.removeChild(listItem);
         };
         
-        // Put the remove button inside the task item
+        // Append the remove button to the li element, 
+        // then append the li to taskList
         listItem.appendChild(removeButton);
-        
-        // Add the complete task to our task list
         taskList.appendChild(listItem);
         
-        // Clear the input field for next task (like erasing the whiteboard)
+        // Clear the task input field by setting taskInput.value to an empty string
         taskInput.value = "";
         
         console.log("✅ Task added successfully!");
     }
     
     // 🎯 STEP 5: Attach Event Listeners
-    // These are like setting up "automatic responses"
-    
-    // Listen for button clicks
+    // Add an event listener to addButton that calls addTask when the button is clicked
     addButton.addEventListener('click', function() {
         console.log("🖱️ Add button clicked!");
         addTask();
     });
     
-    // Listen for Enter key presses in the input field
+    // Add an event listener to taskInput for the 'keypress' event to allow tasks 
+    // to be added by pressing the "Enter" key. Inside this event listener, 
+    // check if event.key is equal to 'Enter' before calling addTask
     taskInput.addEventListener('keypress', function(event) {
         console.log("⌨️ Key pressed:", event.key);
         if (event.key === 'Enter') {
